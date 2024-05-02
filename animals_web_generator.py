@@ -667,24 +667,21 @@ def load_data(file_path):
     return json.load(handle)
 
 def generate_animals_data_string(data):
-    """ Generates a string with the animals' data """
-    output = ''
-    for animal_data in data:
+      """ Generates a string with the animals' data """
+      output = ''
+      for animal_data in data:
+          output += f"Diet: {animal_data['characteristics']['diet']}\n"
+          output += f"Name: {animal_data['name']}\n"
+          if 'locations' in animal_data:
+              output += f"Location: {animal_data['locations'][0]}\n"
+          if 'type' in animal_data:
+              output += f"Type: {animal_data['type']}\n"
+          output += '\n'
+      return output
 
-      output += '<li class="cards__item">'
-      output += f"Name: {animal_data['name']}<br/>\n"
-      output += f"Diet: {animal_data['characteristics']['diet']}<br/>\n"
-      if 'locations' in animal_data:
-        output += f"Location: {animal_data['locations'][0]}<br/>\n"
-      if 'type' in animal_data:
-        output += f"Type: {animal_data['type']}<br/>\n"
-      output += '</li>'
-    return output
 
 animals_data = load_data('animals_data.json')
-
 animals_data_string = generate_animals_data_string(animals_data)
-
 print(animals_data_string)
 
 with open('animals.html', 'r') as file:
@@ -695,6 +692,7 @@ html_content = html_content.replace("__REPLACE_ANIMALS_INFO__", animals_data_str
 # Step 4: Save the generated HTML to a file
 with open('generated_page.html', 'w') as file:
   file.write(html_content)
+
 
 
 
