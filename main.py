@@ -666,7 +666,7 @@ def load_data(file_path):
   with open(file_path, "r") as handle:
     return json.load(handle)
 
-    def generate_animals_data_string(data):
+def generate_animals_data_string(data):
       """ Generates a string with the animals' data """
       output = ''
       for animal_data in data:
